@@ -1,0 +1,11 @@
+.carousel-caption h3 {
+    size: 32px;
+    margin-bottom: 18px;
+}
+.carousel-caption p {
+    margin-bottom: 48px;
+    size: 22px;
+}
+.carousel-caption {
+    text-align: center;
+}
