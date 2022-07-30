@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 야구 게임</title>
+</head>
+<body>
+    <h1>
+        컴퓨터가 0~9 의 중복되지 않는 정수 3개를 랜덤으로 출제하면 맞추는 게임
+    </h1>
+    <h3>게임 규칙</h3>
+    <ol>
+        <li>
+            세자리의 숫자는 각 자리수를 갖고 서로 중복되지 않는다
+        </li>
+        <li>
+            각 자리수와 입력한 숫자의 자리수가 동일하면 1 Strike(스트라이트)
+        </li>
+        <li>
+            입력한 숫자가 포함되어 있으나 자리수가 동일하지 않으면 1 Ball(볼)
+        </li>
+        <li>
+            입력한 숫자가 전혀 포함되어 있지 않으면 Out(아웃)
+        </li>
+        <li>
+            3 스트라이크면 1게임 종료
+        </li>
+        <li>
+            플레이 예시 <br> 컴숫자(4,2,9) > 내추측숫자 (4,1,7) > 1S <br>
+            컴숫자 (4,2,9) > 내추측숫자 (4,9,1) > 1S 1B <br>
+            컴숫자 (4,2,9) > 내추측숫자 (7,4,2) > 2B <br>
+            컴숫자 (4,2,9) > 내추측숫자 (3,8,1) > OUT <br>
+        </li>
+    </ol>
+    <h3>제작 규칙</h3>
+    <ul>
+        <li>
+            1게임을 완료한 시간을 측정할 것
+        </li>
+        <li>
+            게임을 진행하면서 숫자 추측 시도 횟수도 기록할 것
+        </li>
+        <li>
+            페이지를 리프레쉬 하거나 내부 프로그램을 종료하기 전까지의 기록을 오름차순으로 정렬하여 출력할 것
+        </li>
+    </ul>
+    <button type="button" id="btn">번호 생성</button>
+    <input type="n">
+</body>
+</html>
