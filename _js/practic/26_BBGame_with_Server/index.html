@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>숫자 야구 게임</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="containerall">
+    <h1>BASEBALL NUMBERS GAME</h1>
+    <div class="inner">
+      <div class="leftct">
+    유저 이름 : <input type="text" id="myname">
+    <button type="button" id="startBtn">게임 시작</button>
+    <h1 id="comMsg"></h1>
+    숫자 추측하기: <input type="text" id="myNum" />
+    <button type="button" id="tryBtn">추측확인</button>
+    <div class = "center"><ol id="tries"></ol></div>
+  </div>
+  <div class="rightct">
+<div class="album">
+  <div class="container">
+    <button type="button" id="historyBtn">게임기록 확인</button>
+    <ol id="history"></ol>
+    <div class="row" id="itemListArea">
+    </div>
+  </div>
+  <div class="container2" id="detail_list">
+    <h2 class="pb-2" >상세 기록</h2>
+  
+    <div class="row1" style="display:none;">
+      <div class="col">
+        
+        <div>
+          <h4 class="fw">User ID</h4>
+          <p>id value</p>
+        </div>
+      </div>
+      <div class="col">
+        
+        <div>
+          <h4 class="fw">User Name</h4>
+          <p>name value</p>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <h4 class="fw">정답</h4>
+          <p>description value</p>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <h4 class="fw">게임 소요 시간</h4>
+          <p>price value</p>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <h4 class="fw">시도 횟수</h4>
+          <p>category value</p>
+        </div>
+      </div>
+      <div class="col">
+        <div>
+          <h4 class="fw">게임 종료 시간</h4>
+          <p>created value</p>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+    <script>
+      
+      const comSet = new Set();
+      let comNums = [];
+      let count = 0;
+      const duration = { start: 0, finish: 0 };
+      const gameHistory = [];
+      let result = "N";
+
+      document.getElementById("startBtn").addEventListener("click", makeGame);
+      document.getElementById("tryBtn").addEventListener("click", compareNum);
+      
+      function validMyNum(myNum){
+        
+        if(myNum.length != 3){
+          return false;
+        }else if(isNaN(myNum)){ 
+          return false;
+        }else if (new Set(myNum.split("")).size != 3){
+          return false;
+        } else{
+          return true;
+        }
+      }
+
+      function compareNum() {
+        document.getElementById("comMsg").innerText = "";
+        count++;
+        let myNumElem = document.getElementById("myNum");
+       
+        if (validMyNum(myNumElem.value)) {
+          let myNums = myNumElem.value.split("");
+          console.log(myNums);
+          let strike = 0,
+            ball = 0;
+
+          for (let i = 0; i < comNums.length; i++) {
+            for (let j = 0; j < myNums.length; j++) {
+              if (comNums[i] == myNums[j]) {
+                if (i == j) {
+                  strike++;
+                } else {
+                  ball++;
+                }
+                break;
+              }
+            }
+          } 
+
+          result = "N";
+
+          if (strike == 0 && ball == 0) {
+            document.getElementById("tries").innerHTML += `<li> OUT! </li>`;
+          } else {
+            if (strike == 3) {
+              duration.finish = new Date();
+              saveToGameHistory();
+              alert('정답입니다!')
+              result = "Y";
+              document.getElementById("tries").innerHTML  = ''
+            } else {
+              document.getElementById("tries").innerHTML += `<li>${myNums} => ${strike}Strike, ${ball}Ball</li>`;
+            }
+          }
+        } else {
+          document.getElementById('comMsg').innerText = '유효하지 않는 입력값입니다!';
+        }
+          myNumElem.value = "";
+          myNumElem.focus();
+      }
+      function saveToGameHistory() {
+        let gameInfo = {
+          date: new Date(),
+          gap: (duration.finish - duration.start) / 1000,
+          tries: count,
+        };
+        console.log(gameInfo);
+        gameHistory.push(gameInfo);
+      }
+
+      function makeGame() {
+        comSet.clear();
+        comNums = [];
+        count = 0;
+        document.getElementById("tries").innerHTML = "";
+        do {
+          let rNum = Math.floor(Math.random() * 10);
+          comSet.add(rNum);
+        } while (comSet.size < 3);
+        console.log(comSet);
+        document.getElementById("comMsg").innerText = "컴퓨터가 숫자를 정하였습니다!";
+        comSet.forEach(function (v) {
+          comNums.push(v);
+        });
+        console.log(comNums);
+        duration.start = new Date();
+      }
+      
+    </script>
+    <script src="index.js"></script>
+  </body>
+</html>
