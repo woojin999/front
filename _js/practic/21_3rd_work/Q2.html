@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz 2</title>
+</head>
+<body>
+  <h1>
+    Q2. 0 ~ 1000 사이 정수 5개를 랜덤으로 생성하여 가장 큰 수와 작은 수 출력하기 (복습용)
+  </h1>
+  <button type="button" id="ranbtn">랜덤 생성</button>
+  <button type="button" id="btn">출력</button>
+  <h2 id="print"></h2>
+  <script>
+    let numbers = [];
+    document.getElementById('ranbtn').addEventListener('click', function(){
+
+      for (let i = 0; i <5; i++){
+        let number = Math.floor(Math.random()*1001);
+        numbers.push(number)
+      }
+      numbers.sort(function(a, b){return a - b});
+      console.log(numbers);
+      
+    });
+    document.getElementById('btn').addEventListener('click', function(){
+      document.getElementById('print').innerText
+      = `가장 큰수 : ${numbers.pop()}, 가장 작은 수 :${numbers.shift()}`
+      numbers = [];
+    });
+
+  </script>
+</body>
+</html>

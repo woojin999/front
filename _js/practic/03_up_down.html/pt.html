@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" id="randomnum">랜덤 숫자 생성</button>
+    <input type="number" id="mynum" max="100" min="1">
+    <button type="button" id="printBtn">출력</button>
+    <h1 id="printMsg"></h1>
+<h1 id="printid"></h1>
+<h1 id="printid2"></h1>
+<h1 id="printid3"></h1>
+    <script>
+        let rnum = 0;
+        document.getElementById('randomnum').addEventListener('click',function(){
+            let rnum = Math.floor(Math.random()*99 +1);
+            document.getElementById('printMsg').innerText = '컴퓨터가 랜덤으로 숫자를 생성하였습니다';
+            
+        });
+        document.getElementById('printBtn').addEventListener('click', function(){
+            let mynum = parseInt(document.getElementById('mynum').value);
+            if (mynum == rnum) {
+                document.getElementById('printid').innerText = '정답';
+            } else if (mynum > rnum) {
+                document.getElementById('printid2').innerText = 'down';
+            } else {
+                document.getElementById('printid3').innerText = 'up';
+            }
+        });
+    </script>
+</body>
+</html>
